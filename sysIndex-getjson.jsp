@@ -19,23 +19,12 @@
 <input type="hidden" id="seriesNum" value="${requestScope.seriesNum}"/>
 <script src="${ctxStatic}/jquery/jquery-3.1.1.min.js" type="text/javascript"></script>
 <script>
-var kqinf;
 $('#test-response-text').val('');
-var kqinfjson = $.ajax('/xxzx/a/kq/student/getStuVal?phoneNum=13232671057&mac=78:02:f8:fb:e4:4c&sNum=460078191292411', {
+var jqxhr = $.ajax('/xxzx/a/kq/student/getStuVal?phoneNum=13232671057&mac=78:02:f8:fb:e4:4c&sNum=460078191292411', {
     dataType: 'json'
 }).done(function (data) {
-    console.log('成功, 收到的数据: ' + JSON.stringify(data,''));
-    kqinf = data;
-    theFirstLesson = kqinf["0"].absentList[0];
-    theSecondLesson = kqinf["0"].absentList[1];
-    theThireLesson = kqinf["0"].absentList[2];
-    theFourthLesson = kqinf["0"].absentList[3];
-    console.log(kqinf);
+    console.log('成功, 收到的数据: ' + JSON.stringify(data));
     console.log(data);
-    var dl = $('#timeline>dl');
-    dl.prepend('<dd class="pos-left clearfix"><div class="circ"></div><div class="time"></div><div class="events"><div class="events-header">'+ theFirstLesson.nowdate +'</div><div class="events-body"><div class="row"><div class="col-md-6 pull-left"></div><div class="events-desc">'+ theFirstLesson.cdate + '<br>'+ theFirstLesson.curriculumName+ '<br>'+theFirstLesson.kqstautschan+ '<br>&nbsp&nbsp&nbsp&nbsp'+ theSecondLesson.cdate + '<br>'+theSecondLesson.curriculumName+'<br>' + theSecondLesson.kqstautschan + '</div></div><div class="row"> <div class="col-md-6 pull-left"></div> <div class="events-desc">'+ theThireLesson.cdate + '<br>'+theThireLesson.curriculumName+ '<br>'+theThireLesson.kqstautschan + '<br>&nbsp&nbsp&nbsp&nbsp'+theFourthLesson.cdate +'<br>'+theFourthLesson.curriculumName+'<br>'+theFourthLesson.kqstautschan +'</div></div><div class="row"><div class="col-md-6 pull-left"></div><div class="events-desc">Cras condimentum, metus ut vehicul</div></div></div><div class="events-footer"></div></div></dd>');
-
-
 }).fail(function (xhr, status) {
     console.log('失败: ' + xhr.status + ', 原因: ' + status);
 }).always(function () {
@@ -53,8 +42,9 @@ var kqinfjson = $.ajax('/xxzx/a/kq/student/getStuVal?phoneNum=13232671057&mac=78
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <div class="VivaTimeline" id="timeline">
+                <div class="VivaTimeline">
                     <dl>
+                        <dt>May 2016</dt>
                         <dd class="pos-left clearfix">
                             <div class="circ"></div>
                             <div class="time">Feb 03</div>
@@ -65,28 +55,30 @@ var kqinfjson = $.ajax('/xxzx/a/kq/student/getStuVal?phoneNum=13232671057&mac=78
                                         <div class="col-md-6 pull-left">
                                         </div>
                                         <div class="events-desc">
-                                            Lorem ipsum dolor sit amet, consectetur adipisicing 
+                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-6 pull-left">
                                         </div>
                                         <div class="events-desc">
-                                            Morbi at nisi vitae mauris pretium egestas. Morbi 
+                                            Morbi at nisi vitae mauris pretium egestas. Morbi placerat risus ligula, nec placerat urna porta vel. Nullam sollicitudin orci quis odio eleifend, ut facilisis orci lobortis. Vivamus sed lobortis odio. Nam volutpat, leo a ullamcorper luctus, sapien libero auctor est, sed semper massa turpis sed quam. Mauris posuere, libero in ultricies dignissim, lacus purus egestas urna, nec semper lorem tellus non eros. Nam at bibendum libero. Curabitur a ante et orci cursus tincidunt. Vivamus dictum, libero et rhoncus congue, nulla erat mollis dui, vitae cursus dui justo quis velit. In a tellus arcu. Nam at lobortis nisl. Donec consequat placerat eros, quis elementum mauris sodales a. Maecenas id feugiat velit. Phasellus dictum eleifend varius. Cras nec orci turpis. Aenean ut turpis nibh.
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-6 pull-left">
                                         </div>
                                         <div class="events-desc">
-                                            Cras condimentum, metus ut vehicula 
+                                            Cras condimentum, metus ut vehicula euismod, odio massa pulvinar neque, id gravida neque est et sem. Proin consequat id nibh quis molestie. Quisque vehicula purus id purus elementum facilisis. Phasellus sodales nibh quis neque rhoncus aliquet. Nunc eget ipsum efficitur, pretium arcu et, gravida purus. Phasellus tempor lacus ac enim pulvinar elementum. Integer aliquet justo lacinia nunc tempus vulputate.
                                         </div>
                                     </div>
                                 </div>
                                 <div class="events-footer">
+                                    123
                                 </div>
                             </div>
                         </dd>
+                        <dt>Feb 2016</dt>
                         <dd class="pos-right clearfix">
                             <div class="circ"></div>
                             <div class="time">Jan 21</div>
