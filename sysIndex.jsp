@@ -20,20 +20,57 @@
 <script src="${ctxStatic}/jquery/jquery-3.1.1.min.js" type="text/javascript"></script>
 <script>
 var kqinf;
+var macAddress = $("#macAddress")[0].value;
+var phoneNum = $("#phoneNum")[0].value;
+var seriesNum= $("#seriesNum")[0].value;
+var kqinf;
 $('#test-response-text').val('');
-var kqinfjson = $.ajax('/xxzx/a/kq/student/getStuVal?phoneNum=13232671057&mac=78:02:f8:fb:e4:4c&sNum=460078191292411', {
+var kqinfjson = $.ajax('/xxzx/a/kq/student/getStuVal?phoneNum='+phoneNum+'&mac='+macAddress+'&sNum='+seriesNum, {
     dataType: 'json'
 }).done(function (data) {
     console.log('成功, 收到的数据: ' + JSON.stringify(data,''));
     kqinf = data;
-    theFirstLesson = kqinf["0"].absentList[0];
-    theSecondLesson = kqinf["0"].absentList[1];
-    theThireLesson = kqinf["0"].absentList[2];
-    theFourthLesson = kqinf["0"].absentList[3];
+    // theFirstLesson = kqinf["0"].absentList[0];
+    // theSecondLesson = kqinf["0"].absentList[1];
+    // theThireLesson = kqinf["0"].absentList[2];
+    // theFourthLesson = kqinf["0"].absentList[3];
     console.log(kqinf);
     console.log(data);
     var dl = $('#timeline>dl');
-    dl.prepend('<dd class="pos-left clearfix"><div class="circ"></div><div class="time"></div><div class="events"><div class="events-header">'+ theFirstLesson.nowdate +'</div><div class="events-body"><div class="row"><div class="col-md-6 pull-left"></div><div class="events-desc">'+ theFirstLesson.cdate + '<br>'+ theFirstLesson.curriculumName+ '<br>'+theFirstLesson.kqstautschan+ '<br>&nbsp&nbsp&nbsp&nbsp'+ theSecondLesson.cdate + '<br>'+theSecondLesson.curriculumName+'<br>' + theSecondLesson.kqstautschan + '</div></div><div class="row"> <div class="col-md-6 pull-left"></div> <div class="events-desc">'+ theThireLesson.cdate + '<br>'+theThireLesson.curriculumName+ '<br>'+theThireLesson.kqstautschan + '<br>&nbsp&nbsp&nbsp&nbsp'+theFourthLesson.cdate +'<br>'+theFourthLesson.curriculumName+'<br>'+theFourthLesson.kqstautschan +'</div></div><div class="row"><div class="col-md-6 pull-left"></div><div class="events-desc">Cras condimentum, metus ut vehicul</div></div></div><div class="events-footer"></div></div></dd>');
+    switch(kqinf["0"].absentList.length){
+    	case 1:
+    	theFirstLesson = kqinf["0"].absentList[0];
+    	dl.prepend('<dd class="pos-left clearfix"><div class="circ"></div><div class="time"></div><div class="events"><div class="events-header">'+ theFirstLesson.nowdate+'</div><div class="events-body"><div class="row"><div class="col-md-6 pull-left"></div><div class="events-desc">'+ theFirstLesson.cdate + '<br>'+ theFirstLesson.curriculumName+ '<br>'+theFirstLesson.kqstautschan+ '</div></div><div class="row"><div class="col-md-6 pull-left"></div><div class="events-desc">Cras condimentum, metus ut vehicul</div></div></div><div class="events-footer"></div></div></dd>');
+    	break;
+    	case 2:
+    	theFirstLesson = kqinf["0"].absentList[0];
+    	theSecondLesson = kqinf["0"].absentList[1];
+    	dl.prepend('<dd class="pos-left clearfix"><div class="circ"></div><div class="time"></div><div class="events"><div class="events-header">'+ theFirstLesson.nowdate+'</div><div class="events-body"><div class="row"><div class="col-md-6 pull-left"></div><div class="events-desc">'+ theFirstLesson.cdate + '<br>'+ theFirstLesson.curriculumName+ '<br>'+theFirstLesson.kqstautschan+ '<br>&nbsp&nbsp&nbsp&nbsp'+ theSecondLesson.cdate + '<br>'+theSecondLesson.curriculumName+'<br>' + theSecondLesson.kqstautschan + '</div></div><div class="row"><div class="col-md-6 pull-left"></div><div class="events-desc">Cras condimentum, metus ut vehicul</div></div></div><div class="events-footer"></div></div></dd>');
+    	break;
+    	case 3:
+    	theFirstLesson = kqinf["0"].absentList[0];
+    	theSecondLesson = kqinf["0"].absentList[1];
+    	theThireLesson = kqinf["0"].absentList[2];
+    	dl.prepend('<dd class="pos-left clearfix"><div class="circ"></div><div class="time"></div><div class="events"><div class="events-header">'+ theFirstLesson.nowdate+'</div><div class="events-body"><div class="row"><div class="col-md-6 pull-left"></div><div class="events-desc">'+ theFirstLesson.cdate + '<br>'+ theFirstLesson.curriculumName+ '<br>'+theFirstLesson.kqstautschan+ '<br>&nbsp&nbsp&nbsp&nbsp'+ theSecondLesson.cdate + '<br>'+theSecondLesson.curriculumName+'<br>' + theSecondLesson.kqstautschan + '</div></div><div class="row"> <div class="col-md-6 pull-left"></div> <div class="events-desc">'+ theThireLesson.cdate + '<br>'+theThireLesson.curriculumName+ '<br>'+theThireLesson.kqstautschan+'</div></div><div class="row"><div class="col-md-6 pull-left"></div><div class="events-desc">Cras condimentum, metus ut vehicul</div></div></div><div class="events-footer"></div></div></dd>');
+    	case 4:
+    	theFirstLesson = kqinf["0"].absentList[0];
+    	theSecondLesson = kqinf["0"].absentList[1];
+    	theThireLesson = kqinf["0"].absentList[2];
+    	theFourthLesson = kqinf["0"].absentList[3];
+    	dl.prepend('<dd class="pos-left clearfix"><div class="circ"></div><div class="time"></div><div class="events"><div class="events-header">'+ theFirstLesson.nowdate+'</div><div class="events-body"><div class="row"><div class="col-md-6 pull-left"></div><div class="events-desc">'+ theFirstLesson.cdate + '<br>'+ theFirstLesson.curriculumName+ '<br>'+theFirstLesson.kqstautschan+ '<br>&nbsp&nbsp&nbsp&nbsp'+ theSecondLesson.cdate + '<br>'+theSecondLesson.curriculumName+'<br>' + theSecondLesson.kqstautschan + '</div></div><div class="row"> <div class="col-md-6 pull-left"></div> <div class="events-desc">'+ theThireLesson.cdate + '<br>'+theThireLesson.curriculumName+ '<br>'+theThireLesson.kqstautschan + '<br>&nbsp&nbsp&nbsp&nbsp'+theFourthLesson.cdate +'<br>'+theFourthLesson.curriculumName+'<br>'+theFourthLesson.kqstautschan +'</div></div><div class="row"><div class="col-md-6 pull-left"></div><div class="events-desc">Cras condimentum, metus ut vehicul</div></div></div><div class="events-footer"></div></div></dd>');
+    	break;
+    	case 5:
+    	theFirstLesson = kqinf["0"].absentList[0];
+    	theSecondLesson = kqinf["0"].absentList[1];
+    	theThireLesson = kqinf["0"].absentList[2];
+    	theFourthLesson = kqinf["0"].absentList[3];
+    	theFifthLesson = kqinf["0"].absentList[4];
+    	dl.prepend('<dd class="pos-left clearfix"><div class="circ"></div><div class="time"></div><div class="events"><div class="events-header">'+ theFirstLesson.nowdate+'</div><div class="events-body"><div class="row"><div class="col-md-6 pull-left"></div><div class="events-desc">'+ theFirstLesson.cdate + '<br>'+ theFirstLesson.curriculumName+ '<br>'+theFirstLesson.kqstautschan+ '<br>&nbsp&nbsp&nbsp&nbsp'+ theSecondLesson.cdate + '<br>'+theSecondLesson.curriculumName+'<br>' + theSecondLesson.kqstautschan + '</div></div><div class="row"> <div class="col-md-6 pull-left"></div> <div class="events-desc">'+ theThireLesson.cdate + '<br>'+theThireLesson.curriculumName+ '<br>'+theThireLesson.kqstautschan + '<br>&nbsp&nbsp&nbsp&nbsp'+theFourthLesson.cdate +'<br>'+theFourthLesson.curriculumName+'<br>'+theFourthLesson.kqstautschan + '<br>&nbsp&nbsp&nbsp&nbsp'+theFifthLesson.cdate +'<br>'+theFifthLesson.curriculumName+'<br>'+theFifthLesson.kqstautschan +'</div></div><div class="row"><div class="col-md-6 pull-left"></div><div class="events-desc">Cras condimentum, metus ut vehicul</div></div></div><div class="events-footer"></div></div></dd>');
+    	break;
+    	default :
+    	dl.prepend('<dd class="pos-left clearfix"><div class="circ"></div><div class="time"></div><div class="events"><div class="events-header">暂时没数据</div></div><div class="row"><div class="col-md-6 pull-left"></div><div class="events-desc">Cras condimentum, metus ut vehicul</div></div></div><div class="events-footer"></div></div></dd>');
+    }
+    // dl.prepend('<dd class="pos-left clearfix"><div class="circ"></div><div class="time"></div><div class="events"><div class="events-header">'+ theFirstLesson.nowdate+'</div><div class="events-body"><div class="row"><div class="col-md-6 pull-left"></div><div class="events-desc">'+ theFirstLesson.cdate + '<br>'+ theFirstLesson.curriculumName+ '<br>'+theFirstLesson.kqstautschan+ '<br>&nbsp&nbsp&nbsp&nbsp'+ theSecondLesson.cdate + '<br>'+theSecondLesson.curriculumName+'<br>' + theSecondLesson.kqstautschan + '</div></div><div class="row"> <div class="col-md-6 pull-left"></div> <div class="events-desc">'+ theThireLesson.cdate + '<br>'+theThireLesson.curriculumName+ '<br>'+theThireLesson.kqstautschan + '<br>&nbsp&nbsp&nbsp&nbsp'+theFourthLesson.cdate +'<br>'+theFourthLesson.curriculumName+'<br>'+theFourthLesson.kqstautschan +'</div></div><div class="row"><div class="col-md-6 pull-left"></div><div class="events-desc">Cras condimentum, metus ut vehicul</div></div></div><div class="events-footer"></div></div></dd>');
 
 
 }).fail(function (xhr, status) {
@@ -46,8 +83,8 @@ var kqinfjson = $.ajax('/xxzx/a/kq/student/getStuVal?phoneNum=13232671057&mac=78
     <header class="htmleaf-header">
         <h1>考勤时间轴</h1>
         <div class="htmleaf-links">
-            <a class="htmleaf-icon icon-htmleaf-home-outline" href="." title="主页" target="_blank"><span> 主页</span></a>
-            <a class="htmleaf-icon icon-htmleaf-arrow-forward-outline" href="." title="返回" target="_blank"><span> 返回</span></a>
+            <a class="htmleaf-icon icon-htmleaf-home-outline" href="/WEB-INF/views/modules/sys/sysTechHistory.jsp" title="主页" target="_blank"><span> 主页</span></a>
+            <a class="htmleaf-icon icon-htmleaf-arrow-forward-outline" href="/WEB-INF/views/modules/sys/sysTechstatement.jsp" title="返回" target="_blank"><span> 返回</span></a>
         </div>
     </header>
     <div class="container">
@@ -57,29 +94,29 @@ var kqinfjson = $.ajax('/xxzx/a/kq/student/getStuVal?phoneNum=13232671057&mac=78
                     <dl>
                         <dd class="pos-left clearfix">
                             <div class="circ"></div>
-                            <div class="time">Feb 03</div>
+                            <div class="time">无数据</div>
                             <div class="events">
-                                <div class="events-header">Event Heading</div>
+                                <div class="events-header">无数据</div>
                                 <div class="events-body">
                                     <div class="row">
                                         <div class="col-md-6 pull-left">
                                         </div>
                                         <div class="events-desc">
-                                            Lorem ipsum dolor sit amet, consectetur adipisicing 
+                                            无数据
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-6 pull-left">
                                         </div>
                                         <div class="events-desc">
-                                            Morbi at nisi vitae mauris pretium egestas. Morbi 
+                                            无数据
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-6 pull-left">
                                         </div>
                                         <div class="events-desc">
-                                            Cras condimentum, metus ut vehicula 
+                                            无数据
                                         </div>
                                     </div>
                                 </div>
@@ -89,29 +126,29 @@ var kqinfjson = $.ajax('/xxzx/a/kq/student/getStuVal?phoneNum=13232671057&mac=78
                         </dd>
                         <dd class="pos-right clearfix">
                             <div class="circ"></div>
-                            <div class="time">Jan 21</div>
+                            <div class="time">无数据</div>
                             <div class="events">
-                                <div class="events-header">A Very Very Looooooooooooooooooooong Event Heading</div>
+                                <div class="events-header">无数据</div>
                                 <div class="events-body">
                                     <div class="row">
                                         <div class="col-md-6 pull-left">
                                         </div>
                                         <div class="events-desc">
-                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                            无数据
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-6 pull-left">
                                         </div>
                                         <div class="events-desc">
-                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                            无数据
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-6 pull-left">
                                         </div>
                                         <div class="events-desc">
-                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                            无数据
                                         </div>
                                     </div>
                                 </div>
@@ -120,28 +157,7 @@ var kqinfjson = $.ajax('/xxzx/a/kq/student/getStuVal?phoneNum=13232671057&mac=78
                                 </div>
                             </div>
                         </dd>
-                        <dd class="pos-left clearfix">
-                            <div class="circ"></div>
-                            <div class="time">Jan 07</div>
-                            <div class="events">
-                                <div class="events-header">Event Heading</div>
-                                <div class="events-body">
-                                    <div class="row">
-                                        <div class="col-md-6 pull-left">
-                                        </div>
-                                        <div class="events-desc">
-                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </dd>
-                        <dt>Jan 2016</dt>
-                        <dt>Dec 2015</dt>
-                        <dt>Oct 2015</dt>
-                        <dt>Sep 2015</dt>
-                        <dt>Aug 2015</dt>
-                        <dt>aaaa</dt>
+                        <dt>Jan 2017</dt>
                     </dl>
                 </div>
             </div>
